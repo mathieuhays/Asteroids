@@ -2,6 +2,7 @@ from re import purge
 
 import pygame
 from pygame import Color
+from pygame.display import update
 
 from constants import *
 from player import Player
@@ -30,16 +31,13 @@ def main():
                 return
 
         # update
-        # updatable.update(dt)
-        pygame.sprite.Group.update(updatable, dt)
+        for sprite in updatable:
+            sprite.update(dt)
 
         # draw
         screen.fill(black)
-        # drawable.draw(screen)
-        for sprite in pygame.sprite.Group.sprites(drawable):
+        for sprite in drawable:
             sprite.draw(screen)
-
-        #pygame.sprite.Group.draw(drawable, screen)
 
         pygame.display.flip()
         dt = clock.tick(60) / 1000
